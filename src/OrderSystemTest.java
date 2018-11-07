@@ -75,7 +75,6 @@ public class OrderSystemTest {
 		}
 	}
 	
-	
 	@Test
 	public void emptyCart() {
 		OrderSystem.emptyCart();
