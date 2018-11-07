@@ -17,11 +17,11 @@ public class Warehouse{
 		return stock;
 	}
 	
-	public static void removeFromStock(int itemIndex) {
-		stock.remove(itemIndex);
+	public static void removeFromStock(Item item) {
+		stock.remove(item);
 	}
 		
-	public static int inStock (Item item) {
+	public static boolean inStock (Item item) {
 		String type = Item.getType(item);
 		String brand = Item.getBrand(item);
 		Integer size = Item.getSize(item);
@@ -30,12 +30,12 @@ public class Warehouse{
 			if(Item.getType(stock.get(i)) == type) {
 				if(Item.getBrand(stock.get(i)) == brand) {
 					if(Item.getSize(stock.get(i)) == size) {	
-						return i;
+						return true;
 					}	
 				}	
 			}
 		}
-			return -1;
+			return false;
 	}
 	
 	public static void returnToStock(Item item) {

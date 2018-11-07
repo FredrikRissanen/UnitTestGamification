@@ -15,13 +15,11 @@ public class OrderSystem {
 		Warehouse warehouse = new Warehouse();
 		Item jordan = new Item("Shoe", "Jordan", 40);
 		cart.add(jordan); //There's always an item added before each test
-		
 	}
 		
 	public static void addOrder(Item item) {
-			
-			int index = Warehouse.inStock(item);
-			if (index >= 0) {
+			Boolean inStock = Warehouse.inStock(item);
+			if (inStock) {
 				cart.add(item);
 				System.out.println("Your order has been added to cart!");
 			}
@@ -45,16 +43,14 @@ public class OrderSystem {
 			return false;
 		}
 		
-		return true;
-		
+		return true;	
 	}
 	
-	public static void emtyCart() {
+	public static void emptyCart() {
 		for (int i = 0; i < cart.size(); i++) {
 			Warehouse.returnToStock(getOrder(i));
 		}
 		cart = new ArrayList<Item>();
-
 	}
 	
 	
@@ -77,7 +73,8 @@ public class OrderSystem {
 		if (currentDate.before(deliveryDate)) {
 			if(cart.size() > 0) {
 				for (int i = 0; i < cart.size(); i++) {
-					Warehouse.removeFromStock(i);
+					Warehouse.removeFromStock(getOrder(i));
+					//add to sentOrder
 				}
 				cart = new ArrayList<Item>();
 				System.out.println("Checkout completed!");
@@ -98,8 +95,6 @@ public class OrderSystem {
 	    t = ft.parse(deliveryDate); 
 	    System.out.println(t);
 
-	  
-       
         return t;
 	}
 		

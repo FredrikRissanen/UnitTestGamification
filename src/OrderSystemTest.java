@@ -64,7 +64,7 @@ public class OrderSystemTest {
 	public void inCart() {
 		Item jordan = new Item("Shoe", "Jordan", 41); 
 		os.cart.add(jordan);	//Adds item to be removed
-	;
+	
 		Boolean inCart = os.inCart(jordan);
 		
 		try{	
@@ -78,7 +78,7 @@ public class OrderSystemTest {
 	
 	@Test
 	public void emptyCart() {
-		OrderSystem.emtyCart();
+		OrderSystem.emptyCart();
 		int size = OrderSystem.cart.size();
 		
 		try{
@@ -140,6 +140,8 @@ public class OrderSystemTest {
 			fail();
 		}	
 	}
+	
+	
 	
 	
 	
