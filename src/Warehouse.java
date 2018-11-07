@@ -46,7 +46,6 @@ public class Warehouse{
 
 	public Warehouse () {
 		stock = new ArrayList<Item>();
-		Item jordan40 = new Item("Shoe", "Jordan", 40);
 		Item jordan41 = new Item("Shoe", "Jordan", 41);
 		Item jordan42 = new Item("Shoe", "Jordan", 42);
 		Item jordan43 = new Item("Shoe", "Jordan", 43);
@@ -78,7 +77,6 @@ public class Warehouse{
 		Item jc32 = new Item("jeans", "jc", 32);
 		Item jc33 = new Item("jeans", "jc", 33);
 		
-		stock.add(jordan40);
 		stock.add(jordan41);
 		stock.add(jordan42);
 		stock.add(jordan43);

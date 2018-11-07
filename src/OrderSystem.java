@@ -13,9 +13,9 @@ public class OrderSystem {
 		cart = new ArrayList<Item>();
 		sentOrders = new ArrayList<Item>();
 		Warehouse warehouse = new Warehouse();
-		
 		Item jordan = new Item("Shoe", "Jordan", 40);
-		cart.add(jordan);
+		cart.add(jordan); //There's always an item added before each test
+		
 	}
 		
 	public static void addOrder(Item item) {
@@ -39,11 +39,22 @@ public class OrderSystem {
 		Warehouse.returnToStock(item);
 	}
 	
+	public static boolean inCart(Item item) {
+		int index = cart.indexOf(item);
+		if(index < 0) {
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
 	public static void emtyCart() {
 		for (int i = 0; i < cart.size(); i++) {
 			Warehouse.returnToStock(getOrder(i));
 		}
 		cart = new ArrayList<Item>();
+
 	}
 	
 	
@@ -51,8 +62,16 @@ public class OrderSystem {
 		return cart.get(index);
 	}
 	
+	
+	
 	public static void checkoutCart(String date) {
-		Date deliveryDate = formatDeliveryDate(date);
+		Date deliveryDate = null;
+		try {
+			deliveryDate = formatDeliveryDate(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		Date currentDate = new Date();
 
 		if (currentDate.before(deliveryDate)) {
@@ -73,15 +92,13 @@ public class OrderSystem {
 		}
 	}
 	
-	public static Date formatDeliveryDate(String deliveryDate) {
+	public static Date formatDeliveryDate(String deliveryDate) throws ParseException {
 		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd"); 
 	    Date t = null;
-	    
-        try {
-	        t = ft.parse(deliveryDate); 
-	    } catch (ParseException e) { 
-	        System.out.println("Unparseable using " + ft); 
-	    }
+	    t = ft.parse(deliveryDate); 
+	    System.out.println(t);
+
+	  
        
         return t;
 	}
