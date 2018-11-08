@@ -1,7 +1,5 @@
 package test;
 
-
-
 import static org.junit.Assert.*;
 
 import java.text.ParseException;
@@ -14,10 +12,6 @@ import org.junit.Test;
 import build.Item;
 import build.OrderSystem;
 import build.Warehouse;
-
-
-
-
 
 public class OrderSystemTest {
 	OrderSystem os = new OrderSystem();
