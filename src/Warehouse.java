@@ -1,9 +1,6 @@
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.io.*;
 
 public class Warehouse{
 	String type;
@@ -21,7 +18,7 @@ public class Warehouse{
 		stock.remove(item);
 	}
 		
-	public static boolean inStock (Item item) {
+	public boolean inStock (Item item) {
 		String type = Item.getType(item);
 		String brand = Item.getBrand(item);
 		Integer size = Item.getSize(item);
@@ -38,7 +35,7 @@ public class Warehouse{
 			return false;
 	}
 	
-	public static void returnToStock(Item item) {
+	public void returnToStock(Item item) {
 		stock.add(item);
 		System.out.println("returned to stock");
 	}

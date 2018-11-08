@@ -21,6 +21,8 @@ public class OrderSystemTest {
 	@Before
 	public void setUpBeforeEach() throws Exception {
 		//System.out.println("Before");
+		Item jordan = new Item("Shoe", "Jordan", 40);
+		os.cart.add(jordan); //There's always an item added before each test
 	}
 
 	@After
@@ -77,8 +79,8 @@ public class OrderSystemTest {
 	
 	@Test
 	public void emptyCart() {
-		OrderSystem.emptyCart();
-		int size = OrderSystem.cart.size();
+		os.emptyCart();
+		int size = os.cart.size();
 		
 		try{
 			assertEquals(size, 0);	

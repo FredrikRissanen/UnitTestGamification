@@ -3,22 +3,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class OrderSystem {
-	static ArrayList<Item> cart;
-	static ArrayList<Item> sentOrders;
+	ArrayList<Item> cart;
+	ArrayList<Item> sentOrders;
+	Warehouse warehouse = new Warehouse();
 	
 	public OrderSystem() {
 		cart = new ArrayList<Item>();
 		sentOrders = new ArrayList<Item>();
-		Warehouse warehouse = new Warehouse();
-		Item jordan = new Item("Shoe", "Jordan", 40);
-		cart.add(jordan); //There's always an item added before each test
 	}
 		
-	public static void addOrder(Item item) {
-			Boolean inStock = Warehouse.inStock(item);
+	public void addOrder(Item item) {
+			Boolean inStock = warehouse.inStock(item);
 			if (inStock) {
 				cart.add(item);
 				System.out.println("Your order has been added to cart!");
@@ -29,15 +26,15 @@ public class OrderSystem {
 			}	
 		}
 	
-	public static void removeFromCart(Item item) {
+	public void removeFromCart(Item item) {
 		System.out.println("Cancel");
 		int index = cart.indexOf(item);
 		cart.remove(index);
 		System.out.println("Order has been canceled");
-		Warehouse.returnToStock(item);
+		warehouse.returnToStock(item);
 	}
 	
-	public static boolean inCart(Item item) {
+	public boolean inCart(Item item) {
 		int index = cart.indexOf(item);
 		if(index < 0) {
 			return false;
@@ -46,21 +43,21 @@ public class OrderSystem {
 		return true;	
 	}
 	
-	public static void emptyCart() {
+	public void emptyCart() {
 		for (int i = 0; i < cart.size(); i++) {
-			Warehouse.returnToStock(getOrder(i));
+			warehouse.returnToStock(getOrder(i));
 		}
 		cart = new ArrayList<Item>();
 	}
 	
 	
-	public static Item getOrder(int index) {
+	public Item getOrder(int index) {
 		return cart.get(index);
 	}
 	
 	
 	
-	public static void checkoutCart(String date) {
+	public void checkoutCart(String date) {
 		Date deliveryDate = null;
 		try {
 			deliveryDate = formatDeliveryDate(date);
@@ -89,7 +86,7 @@ public class OrderSystem {
 		}
 	}
 	
-	public static Date formatDeliveryDate(String deliveryDate) throws ParseException {
+	public Date formatDeliveryDate(String deliveryDate) throws ParseException {
 		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd"); 
 	    Date t = null;
 	    t = ft.parse(deliveryDate); 
@@ -100,7 +97,7 @@ public class OrderSystem {
 		
 
 	public static void main(String[] args) {
-		
+		/*
 		cart = new ArrayList<Item>();
 		sentOrders = new ArrayList<Item>();
 		Warehouse warehouse = new Warehouse();
@@ -110,6 +107,7 @@ public class OrderSystem {
 		addOrder(jordan);
 		
 		checkoutCart("2018-12-12");
+		*/
 		
 		
 		/*System.out.println("Hi, what would you like to do?\n1: Place a new order \n2: Check your cart\n3: Checkout");
