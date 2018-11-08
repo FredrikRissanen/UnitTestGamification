@@ -1,3 +1,4 @@
+package build;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -5,19 +6,29 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class OrderSystem {
-	ArrayList<Item> cart;
+	private ArrayList<Item> cart;
 	ArrayList<Item> sentOrders;
 	Warehouse warehouse = new Warehouse();
 	
 	public OrderSystem() {
-		cart = new ArrayList<Item>();
+		setCart(new ArrayList<Item>());
 		sentOrders = new ArrayList<Item>();
 	}
+	
+	public ArrayList<Item> getCart() {
+		return cart;
+	}
+
+	public void setCart(ArrayList<Item> cart) {
+		this.cart = cart;
+	}	
+	
+	
 		
 	public void addOrder(Item item) {
 			Boolean inStock = warehouse.inStock(item);
 			if (inStock) {
-				cart.add(item);
+				getCart().add(item);
 				System.out.println("Your order has been added to cart!");
 			}
 			
@@ -28,14 +39,14 @@ public class OrderSystem {
 	
 	public void removeFromCart(Item item) {
 		System.out.println("Cancel");
-		int index = cart.indexOf(item);
-		cart.remove(index);
+		int index = getCart().indexOf(item);
+		getCart().remove(index);
 		System.out.println("Order has been canceled");
 		warehouse.returnToStock(item);
 	}
 	
 	public boolean inCart(Item item) {
-		int index = cart.indexOf(item);
+		int index = getCart().indexOf(item);
 		if(index < 0) {
 			return false;
 		}
@@ -44,15 +55,15 @@ public class OrderSystem {
 	}
 	
 	public void emptyCart() {
-		for (int i = 0; i < cart.size(); i++) {
+		for (int i = 0; i < getCart().size(); i++) {
 			warehouse.returnToStock(getOrder(i));
 		}
-		cart = new ArrayList<Item>();
+		setCart(new ArrayList<Item>());
 	}
 	
 	
 	public Item getOrder(int index) {
-		return cart.get(index);
+		return getCart().get(index);
 	}
 	
 	
@@ -68,12 +79,12 @@ public class OrderSystem {
 		Date currentDate = new Date();
 
 		if (currentDate.before(deliveryDate)) {
-			if(cart.size() > 0) {
-				for (int i = 0; i < cart.size(); i++) {
+			if(getCart().size() > 0) {
+				for (int i = 0; i < getCart().size(); i++) {
 					Warehouse.removeFromStock(getOrder(i));
 					//add to sentOrder
 				}
-				cart = new ArrayList<Item>();
+				setCart(new ArrayList<Item>());
 				System.out.println("Checkout completed!");
 			}
 			else {
@@ -157,8 +168,8 @@ public class OrderSystem {
 		
 		sc.close();
 		*/
-	}	
-	
-	
+	}
+
+
 }
 
