@@ -1,3 +1,4 @@
+package test;
 
 
 
@@ -9,6 +10,10 @@ import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import build.Item;
+import build.OrderSystem;
+import build.Warehouse;
 
 
 
@@ -22,7 +27,7 @@ public class OrderSystemTest {
 	public void setUpBeforeEach() throws Exception {
 		//System.out.println("Before");
 		Item jordan = new Item("Shoe", "Jordan", 40);
-		os.cart.add(jordan); //There's always an item added before each test
+		os.getCart().add(jordan); //There's always an item added before each test
 	}
 
 	@After
@@ -48,14 +53,14 @@ public class OrderSystemTest {
 	
 	@Test
 	public void removeFromCart() {
-		os.cart = new ArrayList<Item>(); //Clears cart
+		os.setCart(new ArrayList<Item>()); //Clears cart
 		Item jordan = new Item("Shoe", "Jordan", 41); 
-		os.cart.add(jordan);	//Adds item to be removed
+		os.getCart().add(jordan);	//Adds item to be removed
 	
 		os.removeFromCart(jordan);
 		
 		try{	
-			assertEquals(os.cart.size(), 0);	
+			assertEquals(os.getCart().size(), 0);	
 		}
 		catch (AssertionError e){
 			fail();
@@ -65,7 +70,7 @@ public class OrderSystemTest {
 	@Test
 	public void inCart() {
 		Item jordan = new Item("Shoe", "Jordan", 41); 
-		os.cart.add(jordan);	//Adds item to be removed
+		os.getCart().add(jordan);	//Adds item to be removed
 	
 		Boolean inCart = os.inCart(jordan);
 		
@@ -80,7 +85,7 @@ public class OrderSystemTest {
 	@Test
 	public void emptyCart() {
 		os.emptyCart();
-		int size = os.cart.size();
+		int size = os.getCart().size();
 		
 		try{
 			assertEquals(size, 0);	
@@ -109,11 +114,11 @@ public class OrderSystemTest {
 		int cartSize;
 		int cartSizeAfter;
 		
-		warehouseSize = Warehouse.stock.size();
-		cartSize = os.cart.size();
+		warehouseSize = Warehouse.getStock().size();
+		cartSize = os.getCart().size();
 		os.checkoutCart("2018-11-08");
-		warehouseSizeAfter = Warehouse.stock.size();
-		cartSizeAfter = os.cart.size();
+		warehouseSizeAfter = Warehouse.getStock().size();
+		cartSizeAfter = os.getCart().size();
 
 		try{
 			assertNotEquals(warehouseSize, warehouseSizeAfter);	
