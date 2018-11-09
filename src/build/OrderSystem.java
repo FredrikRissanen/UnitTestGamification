@@ -22,7 +22,6 @@ public class OrderSystem {
 		this.cart = cart;
 	}	
 	
-	
 		
 	public void addItemToCart(Item item) {
 			Boolean inStock = warehouse.inStock(item);
@@ -69,6 +68,7 @@ public class OrderSystem {
 	
 	public void checkoutCart(String date) {
 		Date deliveryDate = null;
+		
 		try {
 			deliveryDate = formatDeliveryDate(date);
 		} catch (ParseException e) {
@@ -82,6 +82,9 @@ public class OrderSystem {
 				for (int i = 0; i < getCart().size(); i++) {
 					Warehouse.removeFromStock(getCartItem(i));
 					//add to sentOrder
+					
+
+
 				}
 				setCart(new ArrayList<Item>());
 				System.out.println("Checkout completed!");

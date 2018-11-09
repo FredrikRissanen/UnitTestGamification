@@ -21,7 +21,8 @@ public class OrderSystemTest {
 	public void setUpBeforeEach() throws Exception {
 		//System.out.println("Before");
 		Item jordan = new Item("Shoe", "Jordan", 40);
-		os.getCart().add(jordan); //There's always an item added before each test
+		Warehouse.getStock().add(jordan);
+		os.addItemToCart(jordan); //There's always an item added before each test
 	}
 
 	@After
@@ -110,9 +111,11 @@ public class OrderSystemTest {
 		
 		warehouseSize = Warehouse.getStock().size();
 		cartSize = os.getCart().size();
-		os.checkoutCart("2018-11-08");
+		System.out.println(warehouseSize);
+		os.checkoutCart("2018-11-10");
 		warehouseSizeAfter = Warehouse.getStock().size();
 		cartSizeAfter = os.getCart().size();
+		
 
 		try{
 			assertNotEquals(warehouseSize, warehouseSizeAfter);	
