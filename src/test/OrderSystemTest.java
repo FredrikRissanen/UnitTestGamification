@@ -32,7 +32,7 @@ public class OrderSystemTest {
 	@Test
 	public void addOrder() {
 		Item jordan = new Item("Shoe", "Jordan", 41); 
-		os.addOrder(jordan);
+		os.addItemToCart(jordan);
 		
 		Boolean inCart = os.inCart(jordan);
 
@@ -91,7 +91,7 @@ public class OrderSystemTest {
 	
 	@Test
 	public void getOrder() {
-		Item item = os.getOrder(0);
+		Item item = os.getCartItem(0);
 		
 		try{
 			assertNotEquals(item, null);	

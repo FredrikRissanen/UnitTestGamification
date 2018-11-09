@@ -24,7 +24,7 @@ public class OrderSystem {
 	
 	
 		
-	public void addOrder(Item item) {
+	public void addItemToCart(Item item) {
 			Boolean inStock = warehouse.inStock(item);
 			if (inStock) {
 				getCart().add(item);
@@ -55,13 +55,13 @@ public class OrderSystem {
 	
 	public void emptyCart() {
 		for (int i = 0; i < getCart().size(); i++) {
-			warehouse.returnToStock(getOrder(i));
+			warehouse.returnToStock(getCartItem(i));
 		}
 		setCart(new ArrayList<Item>());
 	}
 	
 	
-	public Item getOrder(int index) {
+	public Item getCartItem(int index) {
 		return getCart().get(index);
 	}
 	
@@ -80,7 +80,7 @@ public class OrderSystem {
 		if (currentDate.before(deliveryDate)) {
 			if(getCart().size() > 0) {
 				for (int i = 0; i < getCart().size(); i++) {
-					Warehouse.removeFromStock(getOrder(i));
+					Warehouse.removeFromStock(getCartItem(i));
 					//add to sentOrder
 				}
 				setCart(new ArrayList<Item>());
