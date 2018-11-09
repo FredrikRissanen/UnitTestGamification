@@ -37,7 +37,6 @@ public class Warehouse{
 	
 	public void returnToStock(Item item) {
 		stock.add(item);
-		System.out.println("returned to stock");
 	}
 	
 
