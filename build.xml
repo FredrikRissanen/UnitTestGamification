@@ -1,5 +1,5 @@
 <project name = "JunitTest" default = "test" basedir = ".">
-   <property name = "testdir" location = "test" />
+   <property name = "testdir" location = "target" />
    <property name = "srcdir" location = "src" />
    <property name="reports" location="reports" />
    <property name="lib" location="lib" />
@@ -15,7 +15,7 @@
       <pathelement location = "${srcdir}" />
       <path refid = "classpath.base" />
    </path>
-	
+
    <target name = "clean" >
       <delete verbose = "${full-compile}">
          <fileset dir = "${testdir}" includes = "**/*.class" />
