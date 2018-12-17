@@ -2,7 +2,8 @@
 /reports/
 .classpath
 .project
-
+.gitignore
+/target/
 
 # Compiled source #
 ###################
