@@ -49,7 +49,7 @@
 	            <batchtest fork="yes" todir="${reports}/raw/">
 	                <formatter type="xml" />
 	                <fileset dir="${srcdir}">
-	                    <include name="*tests/*Test*.java" />
+	                    <include name="*z_not_part_of_scope/*Test*.java" />
 	                </fileset>
 	            </batchtest>
 	        </junit>

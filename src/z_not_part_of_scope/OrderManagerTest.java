@@ -1,4 +1,4 @@
-package tests;
+package z_not_part_of_scope;
 
 
 
