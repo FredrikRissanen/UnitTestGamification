@@ -1,12 +1,10 @@
 package models;
 
+import models.foodModels.Food;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import models.foodModels.Food;
-
-
 
 public class OrderManager {
 
@@ -34,15 +32,15 @@ public class OrderManager {
     }
 
     public boolean removeFoodFromOrder(int orderIndex){
-        if (orderIndex < order.size()) {  // BUG && orderIndex >= 0
+        if (orderIndex < order.size()) { // BUG 11
             order.remove(orderIndex);
             return true;
         }
         return false;
     }
 
-    public String getOrderTotalCost(){
-        int sum = 0; // BUG this is DOUBLE MAN
+    public String getOrderTotalCost(){ // BUG 10
+        int sum = 0;
         for (Food food : order) {
         	int i = (int) food.getPrice();
             sum+=i;

@@ -1,9 +1,9 @@
 package controllers;
-import java.util.*;
 
 import models.MenuLoader;
 import models.OrderManager;
 
+import java.util.*;
 
 public class UserController {
 
@@ -12,36 +12,35 @@ public class UserController {
     private MenuLoader menuLoader;
 
     //get command to console from user
-    public String userCommand(){
-        return scanner.next(); // BUG this is nextline, This should be next line because next will stop at the space so you cant scan the whole line just one word for ex
-        
+    public String userCommand(){ // BUG 9
+        return scanner.next();
     }
 
     //check if string is numeric
-    public boolean isNumeric(String str){
+    public boolean isNumeric(String str){ // BUG 8
         try {
             Integer.parseInt(str);
-        } catch (ArrayIndexOutOfBoundsException  nfe) { // BUG original NumberFormatException
+        } catch (ArrayIndexOutOfBoundsException  nfe) {
             return false;
         }
         return true;
     }
 
     //back all foods in order
-    public String showCurrentOrder(){
-        stringBuilder = new StringBuilder();
+    public String showCurrentOrder(){ // BUG 7
         for (int i = 0; i < OrderManager.getInstance().getOrder().size(); i++) {
+            stringBuilder = new StringBuilder();
             stringBuilder.append((i + 1) + ". " + OrderManager.getInstance().getOrder().get(i).toString() + "\n");
         }
         return stringBuilder.toString();
     }
 
     //back to user all small menu options
-    public String showSmallMenuOptions(){
-        stringBuilder = new StringBuilder();
+    public String showSmallMenuOptions(){ // BUG 6
         menuLoader = new MenuLoader();
         int counter = 0;
-        for (String key: menuLoader.getSmallMenu().keySet()) {
+		for (String key : menuLoader.getSmallMenu().keySet()) {
+	        stringBuilder = new StringBuilder();
             counter++;
             stringBuilder.append(" '" + key + "',");
             if (counter%10 == 0){
@@ -52,19 +51,19 @@ public class UserController {
     }
 
     //display to user all small menu options
-    public String showSmallMenu(String foodOptionName){
-        stringBuilder = new StringBuilder();
+    public String showSmallMenu(String foodOptionName){ // BUG 5
         for (int i = 0; i < menuLoader.getSmallMenu().get(foodOptionName).size(); i++) {
+            stringBuilder = new StringBuilder();
             stringBuilder.append((i + 1) + ". " + menuLoader.getSmallMenu().get(foodOptionName).get(i) + "\n");
         }
         return stringBuilder.toString();
     }
 
     //back to user all main course menu options
-    public String showMainCourseMenuOptions(){
-        stringBuilder = new StringBuilder();
-        int counter = 0;
-        for (String key : menuLoader.getMainCourseMenu().keySet()) {
+    public String showMainCourseMenuOptions(){ // BUG 4
+		for (String key : menuLoader.getMainCourseMenu().keySet()) {
+	        stringBuilder = new StringBuilder();
+            int counter = 0;
             counter++;
             stringBuilder.append(" '" + key + "',");
             if (counter%10 == 0){
@@ -75,21 +74,31 @@ public class UserController {
     }
 
     //display to user all options from main course
-    public String showMainCourseMenu(String foodOptionName){
+    public String showMainCourseMenu(String foodOptionName){ // BUG 3
         stringBuilder = new StringBuilder();
         for (int i = 0; i < menuLoader.getMainCourseMenu().get(foodOptionName).size(); i++) {
             stringBuilder.append((i + 1) + ". " + menuLoader.getMainCourseMenu().get(foodOptionName).get(i) + "\n");
         }
-        return stringBuilder.toString();
+        return new StringBuilder().toString();
     }
 
 
-    public boolean checkIfUserEnteredProperSmallMenuFoodOptionName(String foodOptionName){
-        return menuLoader.getSmallMenu().containsKey(foodOptionName);
+    public boolean checkIfUserEnteredProperSmallMenuFoodOptionName(String foodOptionName){ // BUG 1
+        try{
+            menuLoader.getSmallMenu().get(foodOptionName);
+            return true;
+        } catch (ArrayIndexOutOfBoundsException e){
+            return false;
+        }
     }
 
-    public boolean checkIfUserEnteredProperMainCourseFoodOptionName(String foodOptionName){
-        return menuLoader.getMainCourseMenu().containsKey(foodOptionName);
+    public boolean checkIfUserEnteredProperMainCourseFoodOptionName(String foodOptionName){ // BUG 2
+        try {
+            menuLoader.getMainCourseMenu().get(foodOptionName);
+            return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
 
     }
 }

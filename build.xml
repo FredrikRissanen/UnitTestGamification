@@ -57,7 +57,7 @@
 	
 
 	<target name="test" depends="run-tests">
-	        <junitreport todir="${reports}">
+		        <junitreport todir="${reports}">
 	            <fileset dir="${reports}/raw/">
 	                <include name="TEST-*.xml" />
 	            </fileset>
