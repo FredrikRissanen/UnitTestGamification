@@ -54,20 +54,46 @@ public class UserControllerTest {
     }
 
     @Test
-    public void checkIfUserEnteredProperMainCourseFoodOptionNameTest(){ // FOR BUG 1 & 2
+    public void checkIfUserEnteredProperMainCourseFoodOptionNameTest(){ // FOR BUG 1
         UserController usercontroller = new UserController();
         boolean x = usercontroller.checkIfUserEnteredProperMainCourseFoodOptionName("Doesnt exists");
         assertEquals(x, false);
-        x = usercontroller.checkIfUserEnteredProperSmallMenuFoodOptionName("Doesnt exists");
+    }
+    @Test
+    public void checkIfUserEnteredProperMainCourseFoodOptionNameTest2(){ // FOR BUG 2
+        UserController usercontroller = new UserController();
+        boolean x = usercontroller.checkIfUserEnteredProperSmallMenuFoodOptionName("Doesnt exists");
         assertEquals(x, false);
     }
     @Test
-    public void SmallMenuTests() { // BUG 6, 5, 4
+    public void SmallMenuTests() { // BUG 6
     	UserController us = new UserController();
     	assertTrue(us.showSmallMenuOptions().length() > 10);
+    	
+    }
+    
+    @Test
+    public void SmallMenuTests2() { // BUG 5
+    	UserController us = new UserController();
+    	us.showSmallMenuOptions();
         assertTrue(us.showMainCourseMenuOptions().length() > 10);
+    	
+    }
+    
+    @Test
+    public void SmallMenuTests3() { // BUG 4
+    	UserController us = new UserController();
+    	us.showSmallMenuOptions();
     	assertTrue(us.showSmallMenu("drink").length() > 15);
     	
     }
 
+    @Test
+    public void SmallMenuTests4() { // BUG 3
+    	UserController us = new UserController();
+    	us.showSmallMenuOptions();
+    	assertTrue(us.showMainCourseMenu("italian").length() > 1);
+    	
+    }
+    
 }
