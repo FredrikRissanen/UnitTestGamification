@@ -38,7 +38,7 @@
    </target>
 	
 	 <target name="run-tests" depends="compile">
-	        <junit printsummary="yes" haltonfailure="false" showoutput="yes">
+	        <junit printsummary="no" haltonfailure="false" showoutput="no">
 	            <classpath>
 	                <pathelement path="${testdir}" />
 	                <fileset dir="lib">
